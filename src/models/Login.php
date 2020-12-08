@@ -30,6 +30,7 @@ class Login extends Model
     {
         $this->validate();
         $user = User::getOne(['email' => $this->email]); //A BUSCA AQUI É FEITA COM O ATRIBUTO DA Class Login instanciada na $login->email
+        $errors = [];
         if ($user) { //verifica se foi encontrado algum registro no BD com o $login→email e, consequentemente, instanciada a Class User baseado no que foi informado, verificaremos o password
 
             if ($user->end_date) {
@@ -40,9 +41,13 @@ class Login extends Model
                 return $user;
             }
             if (!password_verify($this->password, $user->password)) {
-                throw new AppException('Senha incorreta.'); //funcionalidade adicionada por mim
+                $errors['senha'] = 'Senha incorreta.';
             }
         }
-        throw new AppException('Usuário e senha inválidos.'); //tem q passar a msg pois foi assim instituído pela __construct dessa Class
+        if (count($errors) > 0) {
+            throw new ValidationException($errors);
+        } else {
+            throw new AppException('Usuário e senha inválidos.');
+        } //tem q passar a msg pois foi assim instituído pela __construct dessa Class
     }
 }

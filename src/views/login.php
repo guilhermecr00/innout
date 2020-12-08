@@ -26,12 +26,15 @@
                 <?php
                 $erromail = '';
                 $erropass = '';
+                $errosenha = '';
 
                 if (isset($errors['email'])) {
                     $erromail = $errors['email'];
                 }
                 if (isset($errors['password'])) {
                     $erropass = $errors['password'];
+                } elseif (isset($errors['senha'])) {
+                    $errosenha = $errors['senha'];
                 }
 
                 ?>
@@ -47,9 +50,10 @@
                     <label for="password">Senha
                     </label>
                     <input type="password" id="password" name="password"
-                        class="form-control <?= $erropass ? 'is-invalid' : '' ?>" placeholder=" Informe a senha">
+                        class="form-control <?= $erropass || $errosenha ? 'is-invalid' : '' ?>"
+                        placeholder=" Informe a senha">
                     <div class="invalid-feedback">
-                        <?= $erropass ?>
+                        <?= $erropass ? $erropass : $errosenha;  ?>
                     </div>
                 </form>
             </div>

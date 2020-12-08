@@ -9,7 +9,7 @@ if ($exception) { //para verificarmos se a msg que deve ser impressa é de erro,
     ];
 
     if (get_class($exception) === 'ValidationException') {
-        $errors = $exception->getErrors();
+        $errors = $exception->getErrors(); //['senha'] = 'Senha incorreta.';
     }
 }
 ?>
