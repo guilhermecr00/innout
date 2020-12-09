@@ -41,7 +41,7 @@ class Login extends Model
                 return $user;
             }
             if (!password_verify($this->password, $user->password)) {
-                $errors['senha'] = 'Senha incorreta.';
+                $errors['senha'] = 'Senha incorreta. Caso tenha esquecido sua senha clique <a href="#">Aqui</a> para redefini-lá';
             }
         }
         if (count($errors) > 0) {
