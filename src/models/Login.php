@@ -39,9 +39,6 @@ class Login extends Model
                 //Agora, vamos verificar se a senha também está correta. 
                 return $user;
             }
-            if (!password_verify($this->password, $user->password)) {
-                throw new AppException('Senha incorreta.'); //funcionalidade adicionada por mim
-            }
         }
         throw new AppException('Usuário e senha inválidos.'); //tem q passar a msg pois foi assim instituído pela __construct dessa Class
     }
