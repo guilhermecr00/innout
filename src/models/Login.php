@@ -1,7 +1,7 @@
 <?php
 
 //require_once(realpath(MODEL_PATH . '/User.php'));
-loadModel('User');
+loadModel('User'); // pq vai precisar instanciar o User
 
 class Login extends Model
 {
