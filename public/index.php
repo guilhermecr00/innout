@@ -14,4 +14,4 @@ if ($uri === '/' || $uri === '' || $uri === '/index.php') { //vamos forçar com 
 }
 
 require_once(CONTROLLER_PATH . "/{$uri}");//se for algum dos casos acima, vai cair no login.php
-//se não, irá ser chamado conforme passado no $uri, o que pode ser o days_records com o direcionamento forçado após o login
+//se não, irá ser chamado conforme passado no $uri, o que pode ser o day_records com o direcionamento forçado após o login

@@ -93,6 +93,11 @@ header.header .dropdown-content a:hover {
 header.header .dropdown:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+header.header .dropdown .dropdown-button .avatar {
+    height: 50px;
+    border-radius: 50%;
+}
 /*FIMHEADDR */
 
 /*SIDEBAR*/

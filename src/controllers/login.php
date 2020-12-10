@@ -13,6 +13,7 @@ if (count($_POST) > 0) { //enviar o formulário vazio conta pq fica: array(2) { 
     $login = new Login($_POST);
     try {
         $user = $login->checkLogin();
+        $_SESSION['user'] = $user;
         header("Location:day_records.php");
     } catch (AppException $e) { //no momento q acontecer isso, será instanciado a Class AppException
         $exception = $e; //e logo em seguida setaremos a $exception, seja de desligamento ou de dados inválidos, que cairá lá na template/messages.php
