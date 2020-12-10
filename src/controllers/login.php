@@ -5,6 +5,8 @@
 
 //no controllers vai acontecer a instanciação da class Login e verificação
 loadModel('Login');
+session_start();
+
 $exception = null; //para funcionar a messages.php
 
 if (count($_POST) > 0) { //enviar o formulário vazio conta pq fica: array(2) { ["email"]=> string(0) "" ["password"]=> string(0) "" }, o que já conta como 2 valores dentro do array, logo maior que zero

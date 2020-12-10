@@ -10,7 +10,7 @@ $uri = urldecode(
 
 
 if ($uri === '/' || $uri === '' || $uri === '/index.php') { //vamos forçar com que quando passado o / ou vazio, vá para a login.php
-    $uri = '/login.php';
+    $uri = '/day_records.php';
 }
 
 require_once(CONTROLLER_PATH . "/{$uri}");//se for algum dos casos acima, vai cair no login.php

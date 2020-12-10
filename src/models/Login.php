@@ -1,8 +1,6 @@
 <?php
 
 //require_once(realpath(MODEL_PATH . '/User.php'));
-loadModel('User'); // pq vai precisar instanciar o User
-
 class Login extends Model
 {
     public function validate() //validando não o usuário, mas sim os campos do form

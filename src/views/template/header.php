@@ -34,7 +34,7 @@
                 <div class="dropdown-content">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="logut.php">
+                            <a href="logout.php">
                                 <i class="icofont-logout mr-2"></i>
                                 Sair
                             </a>
