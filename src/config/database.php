@@ -25,12 +25,22 @@ class Database
 
     public static function getResultFromQuery($sql)
     { //2º - consultar e retornar o resultado
-        //para executar a query
+        //para executar a query DE CONSULTAS
 
         $conn = self::getConecction(); //estabelecendo a conexão
         $result = $conn->query($sql); //executando a sql e atribuindo o resultado à variável $result
         $conn->close(); //fechando a conexão;
         return $result; //retornando o resultado
 
+    }
+    public static function executeSQL($sql)
+    { //vai executar uma sql
+        $conn = self::getConecction();
+        if (!mysqli_query($conn, $sql)) { //se esse método retornar falso, isso quer dizer q houve um problema e, então, vamos lançar um exceção
+            throw new Exception((mysqli_error($conn))); //que passará a mensagem de erro
+        } //usando o método nativo do mysqli_insert_id
+        $id = $conn->insert_id; //por padrão, quando se insere algum dado, é desejado que retorne o id do usuário que foi executado a query
+        $conn->close();
+        return $id;
     }
 }

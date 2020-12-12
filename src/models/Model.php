@@ -80,6 +80,19 @@ class Model
         }
     }
 
+    public function insert()
+    { //gerar o comando SQL para fazer a inserção
+        $sql = "INSERT INTO " . static::$tableName . " ("
+            . implode(",", static::$columns) . ") VALUES ("; //implode() =pega um array e transforma em string de acordo com um separador declarado
+        foreach (static::$columns as $col) { //para pegar os valores associados a cada coluna
+            $sql .= static::getFormatedValue($this->$col) . ","; //já que o acesso a esse método acontecerá já por uma instância da class e, dessa maneira, podemos acessar ao atributo da instância através do $this->atributo. 
+
+        } //vai ficar sobrando uma vírgula e precisamos fechar a sql com um parênteses, para isso:
+        $sql[strlen($sql) - 1] = ')'; //acessando o último elemento da string. A última vírgula que ficou no foreach será substituída por um )
+        $id = Database::executeSQL($sql); //pegando o id do usuário obtido através do insert_id que está no executesql e atribuindo a ele a variável $id.
+        $this->id = $id; //agora setando o atributo id da instância atual da class declarada para o id recebido pela query executada
+    }
+
     private static function getFilters($filters) //CONCATENAR FILTROS
     {
         $sql = '';
