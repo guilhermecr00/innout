@@ -2,7 +2,7 @@
 
 $errors = [];
 
-if ($exception) { //para verificarmos se a msg que deve ser impressa é de erro, já iniciamos testando se a $exception está setada
+if (isset(($exception))) { //para verificarmos se a msg que deve ser impressa é de erro, já iniciamos testando se a $exception está setada
     $message = [ //vamos gerar uma mensagem
         'type' => 'error', //o tipo
         'message' => $exception->getMessage() //a mensagem em si

@@ -83,7 +83,7 @@ class Model
     public function insert()
     { //gerar o comando SQL para fazer a inserção
         $sql = "INSERT INTO " . static::$tableName . " ("
-            . implode(",", static::$columns) . ") VALUES ("; //implode() =pega um array e transforma em string de acordo com um separador declarado
+            . implode(",", static::$columns) . ") VALUES ("; //implode() =pega um array e transforma em string e as concatena de acordo com um separador declarado
         foreach (static::$columns as $col) { //para pegar os valores associados a cada coluna
             $sql .= static::getFormatedValue($this->$col) . ","; //já que o acesso a esse método acontecerá já por uma instância da class e, dessa maneira, podemos acessar ao atributo da instância através do $this->atributo. 
 

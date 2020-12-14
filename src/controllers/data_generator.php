@@ -1,4 +1,8 @@
 <?php
+loadModel('WorkingHours');
+
+Database::executeSQL('DELETE FROM working_hours');
+Database::getResultFromQuery('DELETE FROM users WHERE id > 5');
 
 function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) //tem que fechar 100% pois é probabilidade
 {
@@ -34,6 +38,25 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) //tem que fec
         return $lazyDayTemplate;
     }
 }
-echo "<pre>";
-print_r(getDayTemplateByOdds(90, 5, 5));
-echo "</pre>";
+function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate)
+{
+    $currentDate = $initialDate; //data atual recebe a datainicial, cada dataatual será modificada conforme o while
+    $today = new DateTime(); // instanciando a DateTime
+    $columns = ['user_id' => $userId,  'work_date' => $currentDate]; //inserindo na coluna do WorkingHours
+
+    while (isBefore($currentDate, $today)) { //enquanto a data for antes da data de hoje
+        if (!isWeekend($currentDate)) { //não registrar os finais de semana
+            $template = getDayTemplateByOdds($regularRate, $extraRate, $lazyRate); //usando a função para gerar os horários definidos na função conforme os seus rates
+            $columns = array_merge($columns, $template); //agora fazendo um merge para que $coluns também carregue o q foi dado pelas Odds eu seus respectivos time1,time2..., worked_time
+            $workingHours = new WorkingHours($columns); //instanciando a class WorkingHours com os dados da $columns
+            $workingHours->insert(); //inserindo no BD.
+        }
+        $currentDate = getNextDay($currentDate)->format('Y-m-d'); // ainda dentro do while, aqui pegará o próximo dia, que nosso caso, será o dia 2, já que foi passado o dia 1
+        $columns['work_date'] = $currentDate; //vai inserir no index work_date a data atual do cálculo
+    }
+}
+$lastMonth = strtotime('first day of last month');
+populateWorkingHours(1, date('Y-m-1'), 70, 20, 10);
+populateWorkingHours(3, date('Y-m-d', $lastMonth), 20, 75, 5);
+populateWorkingHours(4, date('Y-m-d', $lastMonth), 20, 10, 70);
+echo 'Tudo certo';
