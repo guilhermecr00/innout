@@ -93,6 +93,18 @@ class Model
         $this->id = $id; //agora setando o atributo id da instância atual da class declarada para o id recebido pela query executada
     }
 
+    public function update()
+    { //gerar o comando SQL para fazer a atualização
+        $sql = "UPDATE " . static::$tableName . " SET ";
+        foreach (static::$columns as $col) {
+            $sql .= " {$col} = " . static::getFormatedValue($this->$col) . ","; //$this->$col está passando o atributo do Objeto que responde ao definido no foreach. Ex: (set col(workDate) = $this->$col(valor que está no workDate). 
+            //Se fosse $this->col estamos acessando um atributo do objeto chamado col 
+        }
+        $sql[strlen($sql) - 1] = ' '; //substituir o último caracter por ' '
+        $sql .= "WHERE id = {$this->id}"; //pegar o id como filtro para poder selecionar onde que deve realizar o update
+        Database::executeSQL($sql);
+    }
+
     private static function getFilters($filters) //CONCATENAR FILTROS
     {
         $sql = '';

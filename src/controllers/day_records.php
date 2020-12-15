@@ -5,7 +5,8 @@ requireValidSession(); //só será carregado caso haja uma sessão válida. Se d
 loadModel('WorkingHours');
 
 $date = (new Datetime())->getTimestamp();
-$today = strftime('%d de %B de %Y', $date);
+$today = strftime('%d de %B de %Y', $date); //a diferença de obtenção do dia atual para o do método loadFromUserAndDate é que
+//o primeiro precisa ser tratado para ser impresso, já o segundo será usado no BD e não suportaria esse tipo de formatação
 
 $user = $_SESSION['user'];
 $records = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
