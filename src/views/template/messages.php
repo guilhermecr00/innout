@@ -2,7 +2,10 @@
 
 $errors = [];
 
-if (isset(($exception))) { //para verificarmos se a msg que deve ser impressa é de erro, já iniciamos testando se a $exception está setada
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+} elseif (isset(($exception))) { //para verificarmos se a msg que deve ser impressa é de erro, já iniciamos testando se a $exception está setada
     $message = [ //vamos gerar uma mensagem
         'type' => 'error', //o tipo
         'message' => $exception->getMessage() //a mensagem em si
@@ -19,7 +22,7 @@ $alertType = '';
 if (isset($message) && $message['type'] === 'error') {
     $alertType = 'danger';
 } else {
-    $alertType = 'sucess';
+    $alertType = 'success';
 }
 ?>
 <?php if (isset($message)) { ?>

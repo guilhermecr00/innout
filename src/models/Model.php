@@ -5,6 +5,8 @@ class Model
     protected static $tableName = ''; // Aqui serão definidas de maneira geral, para no User.php ser definida mais específica(ou em qualquer outro lugar que precise realizar consultas)
     protected static $columns = []; //static para poder ser igual à todas as instâncias e com o mesmo valor
     protected $values = []; // não é estático pois cada instância terá o seu próprio $values
+    //além disso, o uso não direto dos atributos escritos possibilita maior dinamicidade, já que cada class
+    //tera por si mesma definida suas chaves->valores
 
     function __construct($arr)
     {
