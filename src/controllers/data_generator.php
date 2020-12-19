@@ -1,7 +1,7 @@
 <?php
 loadModel('WorkingHours');
 
-Database::executeSQL('DELETE FROM working_hours');
+Database::executeSQL('DELETE FROM working_hours'); //nos ajuda nos testes pois está deletando as horas registradas
 Database::getResultFromQuery('DELETE FROM users WHERE id > 5');
 
 function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) //tem que fechar 100% pois é probabilidade
